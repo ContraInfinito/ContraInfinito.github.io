@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathew Carballo — Software Engineer</title>
+<meta name="description" content="Software engineer specializing in Python, cloud infrastructure, and XR development. San Carlos, Costa Rica.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF8;--bg2:#F3F2EE;--bg3:#ECEAE4;
+  --text:#1A1A18;--text2:#5A5A54;--text3:#9A9A90;
+  --accent:#FF5C00;--accent2:#E04E00;--accent-light:#FFF0E8;
+  --border:#E2E0D8;--border2:#CCCAC0;
+  --mono:'DM Mono',monospace;--display:'Fraunces',serif;
+}
+html{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;scroll-behavior:smooth}
+body{min-height:100vh;overflow-x:hidden}
+#app{min-height:100vh;position:relative}
+.topo-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:1}
+.topo-bg svg{position:absolute;top:-20%;left:-10%;width:120%;height:140%;animation:topo-drift 90s linear infinite}
+@keyframes topo-drift{0%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(1%,2%) rotate(0.3deg)}66%{transform:translate(-1%,1%) rotate(-0.2deg)}100%{transform:translate(0,0) rotate(0deg)}}
+.content{position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:54px}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--accent);cursor:pointer;letter-spacing:-0.02em}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-link{color:var(--text2);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:color 0.2s;text-decoration:none;font-family:var(--mono)}
+.nav-link:hover{color:var(--accent)}
+.nav-btn{background:var(--accent);color:#fff;border:none;padding:7px 16px;font-family:var(--mono);font-size:0.72rem;font-weight:500;cursor:pointer;letter-spacing:0.04em;border-radius:2px;transition:background 0.2s}
+.nav-btn:hover{background:var(--accent2)}
+.home{max-width:1080px;margin:0 auto;padding:2rem 2rem 4rem}
+.hero{padding:4rem 0 3rem;display:grid;grid-template-columns:1fr 200px;gap:3rem;align-items:start;border-bottom:1px solid var(--border);margin-bottom:3rem}
+.hero-eyebrow{font-size:0.7rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.pulse-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+.hero h1{font-family:var(--display);font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.0;letter-spacing:-0.03em;margin-bottom:0.5rem;color:var(--text)}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{color:var(--text2);font-size:0.82rem;max-width:520px;line-height:1.9;margin-bottom:1.5rem}
+.hero-contacts{display:flex;flex-wrap:wrap;gap:0.5rem}
+.contact-chip{display:inline-flex;align-items:center;gap:0.35rem;color:var(--text2);font-size:0.7rem;padding:4px 10px;border:1px solid var(--border2);background:var(--bg);cursor:pointer;transition:all 0.2s;text-decoration:none;border-radius:2px}
+.contact-chip:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-light)}
+.status-block{background:var(--bg2);border:1px solid var(--border);padding:1.2rem;font-size:0.7rem;border-radius:3px}
+.status-label{color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem;font-size:0.65rem;border-bottom:1px solid var(--border);padding-bottom:0.4rem}
+.status-row{display:flex;justify-content:space-between;gap:0.5rem;margin-bottom:0.45rem;align-items:baseline}
+.status-key{color:var(--text2)}
+.status-val{color:var(--accent);font-weight:500}
+.elev{color:var(--text3);font-size:0.65rem;margin-top:0.5rem;letter-spacing:0.06em}
+.section{margin-bottom:3rem}
+.section-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.section-num{color:var(--text3);font-size:0.65rem;letter-spacing:0.1em}
+.section-title{font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:-0.01em;color:var(--text)}
+.section-rule{flex:1;height:1px;background:var(--border)}
+.skill-cats{display:flex;flex-direction:column;gap:1rem}
+.skill-cat-row{display:grid;grid-template-columns:120px 1fr;gap:1rem;align-items:start}
+.skill-cat-label{color:var(--text3);font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding-top:0.35rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.skill-tag{background:var(--bg);border:1px solid var(--border2);padding:5px 12px;font-size:0.72rem;cursor:pointer;transition:all 0.2s;color:var(--text);border-radius:2px;display:flex;align-items:center;gap:5px}
+.skill-tag:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+.skill-tag .tag-dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:0}
+.skill-tag:hover .tag-dot{opacity:1}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.proj-card{background:var(--bg);border:1px solid var(--border);padding:1.5rem;cursor:pointer;transition:all 0.25s;border-radius:3px;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform 0.2s;transform-origin:bottom}
+.proj-card:hover{border-color:var(--border2);background:var(--bg2);box-shadow:0 4px 20px rgba(255,92,0,0.06);transform:translateY(-2px)}
+.proj-card:hover::before{transform:scaleY(1)}
+.proj-elev{color:var(--text3);font-size:0.62rem;letter-spacing:0.08em;margin-bottom:0.5rem}
+.proj-date{color:var(--text3);font-size:0.68rem;position:absolute;top:1.5rem;right:1.5rem}
+.proj-title{font-family:var(--display);font-weight:600;font-size:1.05rem;margin-bottom:0.25rem;letter-spacing:-0.01em;color:var(--text)}
+.proj-sub{color:var(--accent);font-size:0.68rem;margin-bottom:0.6rem;letter-spacing:0.04em}
+.proj-desc{color:var(--text2);font-size:0.75rem;line-height:1.75;margin-bottom:0.75rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.3rem}
+.ptag{background:var(--bg2);border:1px solid var(--border);color:var(--text3);font-size:0.62rem;padding:2px 7px;border-radius:1px}
+.proj-cta{color:var(--accent);font-size:0.68rem;margin-top:0.75rem;opacity:0;transition:opacity 0.2s;letter-spacing:0.06em}
+.proj-card:hover .proj-cta{opacity:1}
+.exp-list{display:flex;flex-direction:column;gap:1.5rem}
+.exp-item{padding-left:1.25rem;border-left:2px solid var(--border);transition:border-color 0.2s}
+.exp-item:hover{border-left-color:var(--accent)}
+.exp-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.15rem}
+.exp-title{font-weight:500;font-size:0.85rem;color:var(--text)}
+.exp-period{color:var(--text3);font-size:0.68rem}
+.exp-org{color:var(--accent);font-size:0.72rem;margin-bottom:0.25rem;letter-spacing:0.02em}
+.exp-stack{color:var(--text3);font-size:0.65rem;letter-spacing:0.04em;margin-bottom:0.5rem}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.3rem}
+.exp-bullets li{color:var(--text2);font-size:0.75rem;line-height:1.7;padding-left:1rem;position:relative}
+.exp-bullets li::before{content:'→';color:var(--accent);position:absolute;left:0;font-size:0.7rem}
+.edu-block{background:var(--bg2);border:1px solid var(--border);padding:1.25rem 1.5rem;border-radius:3px}
+.edu-title{font-weight:500;font-size:0.85rem;margin-bottom:0.2rem}
+.edu-inst{color:var(--accent);font-size:0.72rem;margin-bottom:0.4rem}
+.edu-courses{color:var(--text2);font-size:0.72rem;line-height:1.8}
+.refs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.ref-card{background:var(--bg2);border:1px solid var(--border);padding:1.2rem;border-radius:3px}
+.ref-name{font-weight:500;font-size:0.82rem;margin-bottom:0.2rem}
+.ref-role{color:var(--text2);font-size:0.7rem;line-height:1.7;margin-bottom:0.5rem}
+.ref-contact{color:var(--accent);font-size:0.68rem}
+.footer{border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--text3);font-size:0.7rem;margin-top:2rem}
+.footer-coords{color:var(--accent);letter-spacing:0.1em;margin-bottom:0.3rem}
+.detail-view{max-width:860px;margin:0 auto;padding:2rem 2rem 4rem}
+.back-btn{display:inline-flex;align-items:center;gap:0.4rem;color:var(--text2);font-size:0.72rem;cursor:pointer;background:none;border:none;font-family:var(--mono);letter-spacing:0.04em;transition:color 0.2s;margin-bottom:2rem;padding:0}
+.back-btn:hover{color:var(--accent)}
+.detail-header{border-bottom:1px solid var(--border);padding-bottom:1.5rem;margin-bottom:2rem}
+.detail-eyebrow{color:var(--text3);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem}
+.detail-title{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-0.03em;margin-bottom:0.4rem;line-height:1.05}
+.detail-sub{color:var(--accent);font-size:0.8rem;margin-bottom:0.75rem;letter-spacing:0.04em}
+.detail-desc{color:var(--text2);font-size:0.8rem;line-height:1.85;max-width:680px}
+.detail-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+.stack-chip{background:var(--accent-light);border:1px solid rgba(255,92,0,0.2);color:var(--accent);font-size:0.65rem;padding:3px 9px;letter-spacing:0.04em;border-radius:1px}
+.detail-links{display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
+.detail-link{display:inline-flex;align-items:center;gap:0.35rem;color:var(--text);border:1px solid var(--border2);padding:6px 14px;font-size:0.72rem;cursor:pointer;text-decoration:none;transition:all 0.2s;border-radius:2px;font-family:var(--mono)}
+.detail-link:hover,.detail-link.primary{color:var(--accent);border-color:var(--accent);background:var(--accent-light)}
+.demo-box{background:var(--bg2);border:1px solid var(--border);padding:1.5rem;border-radius:3px;margin-bottom:2rem}
+.demo-label{color:var(--text3);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.demo-label::before{content:'▶';color:var(--accent);font-size:0.6rem}
+.demo-hint{color:var(--text2);font-size:0.74rem;margin-bottom:1rem;line-height:1.7}
+.demo-input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:0.74rem;padding:8px 12px;outline:none;transition:border-color 0.2s;border-radius:2px;resize:vertical}
+.demo-input:focus{border-color:var(--accent)}
+.demo-btn{background:var(--accent);color:#fff;border:none;padding:8px 20px;font-family:var(--mono);font-size:0.74rem;font-weight:500;cursor:pointer;letter-spacing:0.04em;transition:background 0.2s;border-radius:2px;margin-top:0.75rem}
+.demo-btn:hover{background:var(--accent2)}
+.demo-btn:disabled{opacity:0.4;cursor:not-allowed}
+.demo-btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border2);padding:8px 20px;font-family:var(--mono);font-size:0.74rem;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;border-radius:2px;margin-top:0.75rem;margin-left:0.5rem}
+.demo-btn-outline:hover{color:var(--accent);border-color:var(--accent)}
+.terminal{background:#111;border:1px solid #333;border-radius:3px;font-family:var(--mono);font-size:0.72rem;line-height:1.7;overflow:hidden}
+.term-bar{background:#1a1a1a;padding:6px 12px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #333}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.term-body{padding:1rem;min-height:80px;max-height:380px;overflow-y:auto;color:#ccc}
+.term-prompt{color:#FF5C00}.term-out{color:#aaa;white-space:pre-wrap}.term-key{color:#FF5C00}.term-val{color:#7dd3b4}.term-comment{color:#555}.term-ok{color:#7dd3b4}.term-med{color:#f5a623}.term-low{color:#7dd3b4}
+.ml-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem}
+.ml-field label{color:var(--text2);font-size:0.68rem;display:block;margin-bottom:0.25rem;letter-spacing:0.04em}
+.ml-field input{width:100%;background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:0.78rem;padding:6px 10px;outline:none;border-radius:2px;transition:border-color 0.2s}
+.ml-field input:focus{border-color:var(--accent)}
+.result-card{background:var(--bg);border:1px solid var(--border);padding:1.25rem;margin-top:1rem;border-radius:3px}
+.result-val{color:var(--accent);font-family:var(--display);font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.25rem}
+.result-meta{color:var(--text2);font-size:0.7rem;line-height:1.7}
+.error-card{background:#fff5f5;border:1px solid #fcc;color:#a00;font-size:0.74rem;padding:0.75rem 1rem;margin-top:0.75rem;border-radius:2px;line-height:1.7}
+.finding-item{background:var(--bg);border-left:3px solid var(--border2);padding:0.75rem 1rem;margin-bottom:0.5rem;border-radius:0 2px 2px 0}
+.finding-crit{border-left-color:#d00}.finding-high{border-left-color:#FF5C00}.finding-med{border-left-color:#f5a623}.finding-low{border-left-color:#7dd3b4}
+.finding-sev{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;margin-bottom:0.2rem}
+.finding-title{font-size:0.78rem;font-weight:500;color:var(--text);margin-bottom:0.2rem}
+.finding-detail{font-size:0.7rem;color:var(--text2);line-height:1.6}
+.finding-fix{font-size:0.68rem;color:var(--text3);margin-top:0.2rem;padding-top:0.2rem;border-top:1px solid var(--border)}
+.clean-banner{background:var(--bg);border:1px solid #c3e6cb;padding:1rem;color:#256;font-size:0.78rem;border-radius:2px;margin-top:0.75rem}
+.skill-why{background:var(--accent-light);border-left:3px solid var(--accent);padding:1rem 1.25rem;margin:1rem 0;font-size:0.78rem;color:var(--text2);line-height:1.8;border-radius:0 2px 2px 0}
+.skill-why strong{color:var(--text);font-weight:500}
+.code-block{background:#111;border:1px solid #333;border-radius:3px;padding:1rem;font-family:var(--mono);font-size:0.72rem;line-height:1.8;overflow-x:auto;color:#ccc;margin:0.75rem 0;white-space:pre}
+.layer-row{display:flex;align-items:stretch;gap:0.5rem;margin-bottom:0.4rem}
+.layer-num{color:var(--text3);font-size:0.65rem;min-width:18px;padding-top:0.4rem;text-align:right}
+.layer-box{flex:1;border:1px solid var(--border);padding:0.5rem 0.75rem;font-size:0.74rem;cursor:pointer;transition:all 0.2s;border-radius:2px}
+.layer-box:hover{border-color:var(--accent);background:var(--accent-light)}
+.layer-title{font-weight:500;color:var(--text);margin-bottom:0.1rem}
+.layer-note{color:var(--text2);font-size:0.68rem}
+.layer-cache{font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase}
+.cache-hit{color:#256}.cache-miss{color:var(--accent)}
+.sql-result{background:#111;color:#ccc;font-family:var(--mono);font-size:0.7rem;padding:0.75rem 1rem;border-radius:3px;max-height:180px;overflow-y:auto;line-height:1.7;white-space:pre}
+.goroutine-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem}
+.goroutine-label{color:var(--text3);font-size:0.68rem;min-width:90px}
+.goroutine-track{flex:1;background:var(--bg3);height:16px;border-radius:1px;overflow:hidden}
+.goroutine-bar{height:100%;background:var(--accent);transition:width 0.06s linear;border-radius:1px}
+.goroutine-status{color:var(--text3);font-size:0.65rem;min-width:48px;text-align:right}
+.tab-btn{background:var(--bg2);border:1px solid var(--border);color:var(--text2);font-family:var(--mono);font-size:0.7rem;padding:5px 14px;cursor:pointer;border-radius:2px;transition:all 0.2s}
+.tab-btn.active{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+.topo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem}
+.topo-node{background:var(--bg);border:1px solid var(--border);padding:0.6rem 0.9rem;border-radius:2px;cursor:pointer;transition:all 0.2s}
+.topo-node:hover,.topo-node.active{border-color:var(--accent);background:var(--accent-light)}
+.topo-node-name{font-weight:500;font-size:0.78rem;color:var(--text)}
+.topo-node-role{color:var(--text3);font-size:0.65rem}
+.topo-panel{background:var(--bg2);border:1px solid var(--accent);padding:1rem;margin-top:0.75rem;border-radius:2px;font-size:0.76rem;color:var(--text2);line-height:1.75}
+.loading{display:flex;align-items:center;gap:0.5rem;color:var(--text3);font-size:0.74rem;padding:1rem 0}
+.spinner{width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fade-in{animation:fadeUp 0.35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+@media(max-width:700px){
+  .hero{grid-template-columns:1fr}.status-block{display:none}
+  .skill-cat-row{grid-template-columns:1fr}.skill-cat-label{padding-bottom:0.25rem}
+  .ml-grid{grid-template-columns:1fr}
+  nav{padding:0 1rem}.nav-links .nav-link{display:none}
+  .home{padding:1rem 1rem 3rem}.detail-view{padding:1rem 1rem 3rem}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const CV={
+  name:"Mathew Josue Carballo Lopez",location:"San Carlos, Costa Rica",phone:"+506 7194 7614",
+  email:"macarb2831@gmail.com",linkedin:"linkedin.com/in/mathewjc",github:"github.com/ContraInfinito",
+  summary:"Software engineer specializing in Python, cloud infrastructure, and XR development. Leads end-to-end system design from architecture through delivery, with direct client engagement in English on international projects. Hands-on AWS experience building and running CIS benchmark security tooling with boto3 against live accounts. Practitioner of AI-assisted development through structured agent orchestration, custom skill systems, and multi-model workflows. Published open-source tooling to PyPI.",
+  skills:{
+    "Languages":["Python","Go","TypeScript / JS","C#","Java","SQL","C++"],
+    "Cloud & Infra":["AWS","Azure","Docker","k3s / Kubernetes","GitHub Actions","Linux (Ubuntu 24.04)"],
+    "Backend":["FastAPI","REST API design","Async Python","boto3","Databricks","Scrapy / Playwright","PostgreSQL"],
+    "AI & Tooling":["LLM API integration","Prompt engineering","Agent orchestration","Claude Code","MCP protocol"],
+    "XR & Systems":["Unity","Meta Quest","XR Interaction Toolkit","C# (XR)","Immersive architecture"],
+    "Observability":["Prometheus","Grafana","Loki","OpenTelemetry","PromQL","Alerting pipelines"]
+  },
+  projects:[
+    {id:"praxis",title:"Praxis",sub:"AI Agent Methodology Transfer Tool",date:"May 2026",
+     stack:["Python","PyPI","Claude Code","Cursor","CLI","YAML","Markdown"],elev:"△ 3842m",
+     desc:"Built a Python CLI and Bob IDE custom mode that reads an existing codebase or planning document and generates idiomatic AI agent configuration for three target ecosystems simultaneously — Bob IDE, Claude Code, and Cursor — encoding a seven-principle methodology contract into each.",
+     bullets:["Designed a two-phase handshake architecture: Phase 1 performs deterministic stack detection; Phase 2 renders per-target templates. The boundary is a validated JSON contract, making the CLI orchestrator-agnostic.","Published to PyPI (pip install praxis-bob). Built and submitted solo in 48 hours for the IBM Bob Hackathon 2026."],
+     github:"https://github.com/ContraInfinito/bob-praxis",demo:"praxis"},
+    {id:"auditor",title:"aws-policy-auditor",sub:"IAM & S3 Security Auditor",date:"Jun 2026",
+     stack:["Python","boto3","FastAPI","Click","Pydantic","GitHub Actions","Render"],elev:"△ 2647m",
+     desc:"Python CLI and FastAPI service that audits AWS IAM policies and S3 bucket configurations against CIS AWS Foundations Benchmark rules using boto3. Implements 17 checks across two services. Ran against a real AWS account — identified and remediated 4 IAM misconfigurations. Re-scan confirmed zero findings.",
+     bullets:["Implements 17 checks covering wildcard permissions, public access exposure, encryption, versioning, and password policy strength.","Ran against a real AWS account — found 4 misconfigurations, fixed them, re-scan confirmed zero findings. CI passing on Python 3.11 and 3.12."],
+     github:"https://github.com/ContraInfinito/aws-policy-auditor",live:"https://aws-policy-auditor.onrender.com/docs",demo:"auditor"},
+    {id:"ml",title:"Football Market Value Predictor",sub:"MLOps Pipeline",date:"Feb 2026",
+     stack:["Python","FastAPI","Docker","scikit-learn","RandomForest","Render"],elev:"△ 1203m",
+     desc:"End-to-end MLOps pipeline: data ingestion, 5-fold cross-validation, Dockerized FastAPI serving with health checks, and systematic P50/P95 latency benchmarking. Caught and corrected a data leakage bug (R²=0.9997 → R²=0.80).",
+     bullets:["Dockerized FastAPI serving with health checks and P50/P95 latency benchmarking.","Caught and corrected a data leakage bug — derived feature calculated pre-split was contaminating the test set. Honest R²=0.80."],
+     github:"https://github.com/ContraInfinito/ml-infrastart",live:"https://ml-infrastart.onrender.com",demo:"ml"}
+  ],
+  experience:[
+    {title:"Simulation Software Engineer",org:"PimaSens R&D / MacEwan University",period:"Feb 2026 – Present",
+     stack:"Unity · C# · Meta Quest · XR Interaction Toolkit · AI Agent Orchestration",
+     bullets:["Embedded with PimaSens R&D — a Canadian agritech company — through an international collaboration between MacEwan University (Edmonton, Alberta) and TEC San Carlos.",
+       "Solution architect for the Agrilo VR Training Module: 13-step colorimetric soil analysis protocol with physics-accurate liquid simulation, grab/pour/shake/syringe/pipette interactions, and a full state machine.",
+       "Direct client communication in English with PimaSens R&D and MacEwan supervisors — conducting requirements sessions with Dr. Mohammed Elmorsy and iterating based on industry feedback.",
+       "Translated PimaSens' business problem — scaling agricultural training to remote regions in Costa Rica and Kenya — into a Meta Quest deployable solution requiring no specialized infrastructure.",
+       "Orchestrated AI agents to accelerate development through structured prompt engineering and custom skill systems."]},
+    {title:"Competitive Programming Coach",org:"ITCR San Carlos",period:"2023 – 2024",
+     stack:"Algorithms · Data Structures · Training Design",
+     bullets:["Coached students to 1 gold and multiple silver/bronze medals at national contests.","Designed structured training materials covering algorithms, data structures, and optimization."]},
+    {title:"Hackathon Team Lead",org:"ITCR",period:"2024",
+     stack:"Architecture · Team Leadership · Delivery",
+     bullets:["Led a 4-person cross-functional team in a competitive hackathon.","Owned architecture, task decomposition, and full delivery under a hard time constraint."]}
+  ]
+};
+
+const IAM_RULES={"IAM-002":{id:"IAM-002",title:"Policy allows wildcard Action ('Action: *')",sev:"HIGH",remediation:"Replace Action: * with specific actions required for the use case.",cis:"CIS 1.16"},"IAM-003":{id:"IAM-003",title:"Policy allows wildcard Resource ('Resource: *')",sev:"HIGH",remediation:"Replace Resource: * with specific resource ARNs.",cis:"CIS 1.16"},"IAM-009":{id:"IAM-009",title:"NotAction or NotResource used in policy",sev:"MEDIUM",remediation:"Replace NotAction/NotResource with explicit Action/Resource lists.",cis:"CIS 1.16"},"IAM-010":{id:"IAM-010",title:"Policy allows AssumeRole without condition",sev:"MEDIUM",remediation:"Add Condition requiring MFA or ExternalId for AssumeRole actions.",cis:"CIS 1.20"}};
+
+function analyzePolicy(str){let p;try{p=JSON.parse(str);}catch(e){return{error:"Invalid JSON: "+e.message};}const findings=[];let stmts=p.Statement||[];if(!Array.isArray(stmts))stmts=[stmts];for(const s of stmts){if(s.Effect!=="Allow")continue;let a=s.Action||[];if(typeof a==="string")a=[a];let r=s.Resource||[];if(typeof r==="string")r=[r];if(a.includes("*")||a.includes("sts:*"))findings.push({...IAM_RULES["IAM-002"],detail:"Statement allows Action: "+JSON.stringify(a)});if(r.includes("*"))findings.push({...IAM_RULES["IAM-003"],detail:"Statement applies to Resource: *"});if(s.NotAction)findings.push({...IAM_RULES["IAM-009"],detail:"Statement uses NotAction: "+JSON.stringify(s.NotAction)});if(s.NotResource)findings.push({...IAM_RULES["IAM-009"],detail:"Statement uses NotResource: "+JSON.stringify(s.NotResource)});const as=new Set(["sts:AssumeRole","sts:*","*"]);if(a.some(x=>as.has(x))&&!s.Condition)findings.push({...IAM_RULES["IAM-010"],detail:"sts:AssumeRole allowed without a Condition block."});}return{findings};}
+
+const PRAXIS_TPL={
+  claude:s=>`# CLAUDE.md — Generated by Praxis v1.0\n# Stack: ${s||"Python · FastAPI · Docker"}\n# Generated: ${new Date().toISOString().split('T')[0]}\n\n## Agent Contract — 7-Principle Methodology\n\n1. Deterministic first — rule-based logic before inference\n2. Validated boundaries — all inter-agent data passes schema validation\n3. Single responsibility — one agent, one concern\n4. Fail loudly — no silent degradation; surface errors immediately\n5. Idempotent operations — repeated invocations produce identical results\n6. Audit trail — every agent decision logged with rationale\n7. Human gate — irreversible actions require explicit confirmation\n\n## Commands\n\n  python -m src.agent run\n  python -m src.schemas validate\n  pytest tests/ -v\n\n## Context\n- Language: Python 3.11+\n- Key patterns: async/await, pydantic models, structured logging\n- Output format: structured JSON with status, data, errors\n\n---\n*Generated by Praxis — github.com/ContraInfinito/bob-praxis*`,
+  cursor:s=>`---\ndescription: Agent rules\nglobs: ["**/*.py","**/*.ts"]\nalwaysApply: true\n---\n\n# Cursor Rules — Praxis Generated\n# Stack: ${s||"Python · FastAPI · Docker"}\n\n## Rules\n- Always write type hints for Python functions\n- Every public function needs a docstring\n- Tests mirror src/ structure in tests/\n- Use structured logging (structlog/loguru), never print()\n- Imports: stdlib → third-party → local\n\n## Forbidden\n- except: without exception type\n- Mutable default arguments\n- Global state mutation\n\n*Generated by Praxis — pip install praxis-bob*`
+};
+
+const SQL_DATA={"Players by market value":{cols:["player","age","goals","assists","market_value"],rows:[["K. Mbappé",25,30,12,"€220M"],["E. Haaland",24,36,8,"€180M"],["V. Junior",24,28,14,"€150M"],["J. Bellingham",21,19,13,"€150M"],["P. Foden",24,22,11,"€130M"],["B. Saka",23,20,16,"€120M"],["Pedri",22,12,15,"€100M"]]},"Goals > 20 only":{cols:["player","goals","market_value"],rows:[["K. Mbappé",30,"€220M"],["E. Haaland",36,"€180M"],["V. Junior",28,"€150M"],["P. Foden",22,"€130M"]]},"Avg value by age group":{cols:["age_group","players","avg_value"],rows:[["21-23","3","€123M"],["24-26","4","€170M"],["27+","1","€45M"]]}};
+
+const K8S_NODES=[{id:"ctrl",name:"Control Plane",role:"k3s server",desc:"API Server, Scheduler, Controller Manager, and etcd (embedded in k3s). Manages cluster state, schedules pods, and reconciles desired vs actual state."},{id:"fastapi",name:"Pod: FastAPI",role:"Instrumented service",desc:"The OpenTelemetry-instrumented FastAPI application. Emits traces, metrics, and logs. Tracks request latency, error rates, and throughput per endpoint."},{id:"prometheus",name:"Pod: Prometheus",role:"Metrics store",desc:"Scrapes metrics endpoints on a 15s interval. Mathew wrote PromQL alert rules to fire on latency spikes and error rate thresholds."},{id:"grafana",name:"Pod: Grafana",role:"Dashboards",desc:"Unified observability frontend connecting to Prometheus (metrics), Loki (logs). Dashboards show P50/P95 latency, error budgets, and log streams."},{id:"loki",name:"Pod: Loki",role:"Log aggregation",desc:"Horizontally scalable log aggregation. Stores logs by labels, not content. Promtail tails container logs and ships them here."},{id:"promtail",name:"DaemonSet: Promtail",role:"Log shipper",desc:"Runs on every node. Discovers containers via k8s service discovery, attaches metadata labels, and ships logs to Loki."}];
+
+let STATE={view:{type:"home"},mlResult:null,mlLoading:false,policyInput:'{\n  "Version": "2012-10-17",\n  "Statement": [{\n    "Effect": "Allow",\n    "Action": "*",\n    "Resource": "*"\n  }]\n}',policyResult:null,praxisInput:"Python · FastAPI · PostgreSQL · Docker · GitHub Actions",praxisTab:"claude",praxisOutput:null,praxisLoading:false,sqlQuery:"Players by market value",k8sActive:null,goroutinesRunning:false};
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function sqlResult(){const d=SQL_DATA[STATE.sqlQuery];if(!d)return'';const sep='─'.repeat(48);let o=d.cols.join(' │ ')+'\n'+sep+'\n';d.rows.forEach(r=>{o+=r.join(' │ ')+'\n';});o+=sep+'\n('+d.rows.length+' rows)';return o;}
+
+function render(){document.getElementById("app").innerHTML=buildApp();attachEvents();}
+function goHome(){STATE.view={type:"home"};render();window.scrollTo(0,0);}
+function goProject(id){STATE.view={type:"project",id};render();window.scrollTo(0,0);}
+function goSkill(id,cat,label){STATE.view={type:"skill",id,cat,label};render();window.scrollTo(0,0);}
+function scrollToSection(id){if(STATE.view.type!=="home"){goHome();setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:"smooth"}),150);}else document.getElementById(id)?.scrollIntoView({behavior:"smooth"});}
+function setK8s(id){STATE.k8sActive=STATE.k8sActive===id?null:id;render();window.scrollTo(0,0);}
+function setSqlQuery(v){STATE.sqlQuery=v;const el=document.getElementById("sql-result");if(el){el.textContent=sqlResult();}}
+function setPraxisTab(t){STATE.praxisTab=t;const inp=document.getElementById("praxis-input");const s=inp?inp.value:STATE.praxisInput;STATE.praxisOutput=PRAXIS_TPL[t](s);render();window.scrollTo(0,0);}
+function runPraxis(){const inp=document.getElementById("praxis-input");STATE.praxisInput=inp?inp.value:STATE.praxisInput;STATE.praxisOutput=null;const ld=document.getElementById("praxis-loading");if(ld)ld.innerHTML='<div class="loading"><div class="spinner"></div>Analyzing stack and generating config...</div>';setTimeout(()=>{STATE.praxisOutput=PRAXIS_TPL[STATE.praxisTab](STATE.praxisInput);render();window.scrollTo(0,0);},1600);}
+function runPolicyAnalysis(){const inp=document.getElementById("policy-input");STATE.policyInput=inp?inp.value:STATE.policyInput;STATE.policyResult=analyzePolicy(STATE.policyInput);render();window.scrollTo(0,0);}
+async function runML(){const btn=document.getElementById("ml-btn");if(btn)btn.disabled=true;STATE.mlLoading=true;STATE.mlResult=null;render();window.scrollTo(0,0);const p={age:parseFloat(document.getElementById("ml-age")?.value||24),games:parseFloat(document.getElementById("ml-games")?.value||30),goals:parseFloat(document.getElementById("ml-goals")?.value||15),assists:parseFloat(document.getElementById("ml-assists")?.value||8),minutes:parseFloat(document.getElementById("ml-minutes")?.value||2500),position:parseFloat(document.getElementById("ml-pos")?.value||3)};try{const r=await fetch("https://ml-infrastart.onrender.com/predict",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(p),signal:AbortSignal.timeout(50000)});if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();const raw=d.predicted_value||d.prediction||d.market_value||d.value;STATE.mlResult={value:typeof raw==="number"?"€"+Math.round(raw/1e5)/10+"M":String(raw)};}catch(e){STATE.mlResult={error:"Model endpoint unreachable: "+e.message};}STATE.mlLoading=false;render();window.scrollTo(0,0);}
+const GDURATIONS=[2200,1600,3100,2600,1400];
+function runGoroutines(){if(STATE.goroutinesRunning)return;STATE.goroutinesRunning=true;[0,1,2,3,4].forEach(i=>{const b=document.getElementById("g-bar-"+i);const s=document.getElementById("g-stat-"+i);if(!b||!s)return;b.style.width="0%";b.style.background="var(--accent)";s.textContent="running";s.style.color="var(--accent)";const dur=GDURATIONS[i];const start=Date.now();const iv=setInterval(()=>{const pct=Math.min(100,Math.round((Date.now()-start)/dur*100));b.style.width=pct+"%";if(pct>=100){clearInterval(iv);s.textContent="done";s.style.color="var(--text3)";b.style.background="var(--text3)";if(i===4)setTimeout(()=>{STATE.goroutinesRunning=false;},500);}},40);});}
+
+function buildApp(){return`
+<div class="topo-bg"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#FF5C00" stroke-width="1.5"><path d="M-100,400 C50,350 150,420 300,380 C450,340 500,300 650,320 C800,340 900,400 1050,370 C1150,350 1200,380 1350,360" opacity="0.06"/><path d="M-100,440 C60,390 170,455 320,415 C470,375 520,335 670,355 C820,375 920,435 1070,405 C1170,385 1220,415 1350,395" opacity="0.05"/><path d="M-100,480 C70,430 190,490 340,450 C490,410 540,370 690,390 C840,410 940,470 1090,440 C1190,420 1240,450 1350,430" opacity="0.04"/><path d="M-100,360 C40,310 140,385 290,345 C440,305 490,265 640,285 C790,305 890,365 1040,335 C1140,315 1190,345 1350,325" opacity="0.05"/><path d="M-100,320 C30,270 130,350 280,310 C430,270 480,230 630,250 C780,270 880,330 1030,300 C1130,280 1180,310 1350,290" opacity="0.04"/><path d="M-100,200 C80,160 200,230 380,180 C520,140 600,100 750,130 C900,160 980,220 1100,190 C1200,170 1260,200 1350,180" opacity="0.04"/><path d="M-100,600 C100,560 220,630 400,580 C540,540 620,500 770,530 C920,560 1000,620 1120,590 C1220,570 1280,600 1350,580" opacity="0.04"/><path d="M200,50 C240,150 260,250 240,380 C220,510 180,600 200,720" opacity="0.04"/><path d="M500,50 C540,150 560,250 540,380 C520,510 480,600 500,720" opacity="0.04"/><path d="M800,50 C840,150 860,250 840,380 C820,510 780,600 800,720" opacity="0.03"/><path d="M350,50 C390,150 410,250 390,380 C370,510 330,600 350,720" opacity="0.03"/><path d="M650,50 C690,150 710,250 690,380 C670,510 630,600 650,720" opacity="0.03"/></g></svg></div>
+<div class="content">
+<nav><div class="nav-logo" onclick="goHome()">MJC △</div><div class="nav-links"><span class="nav-link" onclick="scrollToSection('skills')">Skills</span><span class="nav-link" onclick="scrollToSection('projects')">Projects</span><span class="nav-link" onclick="scrollToSection('experience')">Experience</span><a class="nav-btn" href="mailto:macarb2831@gmail.com">hire_me()</a></div></nav>
+${STATE.view.type==="home"?buildHome():STATE.view.type==="project"?buildProjectView(STATE.view.id):buildSkillView(STATE.view.id,STATE.view.cat,STATE.view.label)}
+</div>`;}
+
+function buildHome(){return`<div class="home fade-in">
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow"><span class="pulse-dot"></span>Open to work · Jun 2026</div>
+    <h1>Mathew<br><em>Carballo</em></h1>
+    <div class="hero-sub">${CV.summary}</div>
+    <div class="hero-contacts">
+      <a class="contact-chip" href="mailto:${CV.email}">✉ ${CV.email}</a>
+      <a class="contact-chip" href="https://${CV.linkedin}" target="_blank">↗ LinkedIn</a>
+      <a class="contact-chip" href="https://${CV.github}" target="_blank">⌥ GitHub</a>
+      <span class="contact-chip">📍 ${CV.location}</span>
+    </div>
+  </div>
+  <div><div class="status-block">
+    <div class="status-label">// status</div>
+    <div class="status-row"><span class="status-key">role</span><span class="status-val">SWE</span></div>
+    <div class="status-row"><span class="status-key">grad</span><span class="status-val">Jun 2026</span></div>
+    <div class="status-row"><span class="status-key">english</span><span class="status-val">C1</span></div>
+    <div class="status-row"><span class="status-key">pypi</span><span class="status-val">published</span></div>
+    <div class="status-row"><span class="status-key">aws</span><span class="status-val">live</span></div>
+    <div class="status-row"><span class="status-key">xr</span><span class="status-val">active</span></div>
+    <div class="elev">△ 840m · San Carlos</div>
+  </div></div>
+</div>
+<div id="skills" class="section">
+  <div class="section-header"><span class="section-num">01</span><span class="section-title">Technical Skills</span><div class="section-rule"></div></div>
+  <div class="skill-cats">${Object.entries(CV.skills).map(([cat,skills])=>`<div class="skill-cat-row"><div class="skill-cat-label">${cat}</div><div class="skill-tags">${skills.map(s=>`<div class="skill-tag" onclick="goSkill('${s.replace(/[^a-zA-Z0-9]/g,'_')}','${esc(cat)}','${esc(s)}')"><span class="tag-dot"></span>${s}</div>`).join('')}</div></div>`).join('')}</div>
+</div>
+<div id="projects" class="section">
+  <div class="section-header"><span class="section-num">02</span><span class="section-title">Projects</span><div class="section-rule"></div></div>
+  <div class="projects-grid">${CV.projects.map(p=>`<div class="proj-card" onclick="goProject('${p.id}')"><div class="proj-elev">${p.elev}</div><div class="proj-date">${p.date}</div><div class="proj-title">${p.title}</div><div class="proj-sub">${p.sub}</div><div class="proj-desc">${p.desc.substring(0,130)}...</div><div class="proj-tags">${p.stack.slice(0,4).map(t=>`<span class="ptag">${t}</span>`).join('')}${p.stack.length>4?`<span class="ptag">+${p.stack.length-4}</span>`:''}</div><div class="proj-cta">→ open demo + code</div></div>`).join('')}</div>
+</div>
+<div id="experience" class="section">
+  <div class="section-header"><span class="section-num">03</span><span class="section-title">Experience</span><div class="section-rule"></div></div>
+  <div class="exp-list">${CV.experience.map(e=>`<div class="exp-item"><div class="exp-header"><div class="exp-title">${e.title}</div><div class="exp-period">${e.period}</div></div><div class="exp-org">${e.org}</div><div class="exp-stack">${e.stack}</div><ul class="exp-bullets">${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`).join('')}</div>
+</div>
+<div class="section">
+  <div class="section-header"><span class="section-num">04</span><span class="section-title">Education</span><div class="section-rule"></div></div>
+  <div class="edu-block"><div class="edu-title">B.Sc. Computer Engineering (expected Jun 2026)</div><div class="edu-inst">Instituto Tecnológico de Costa Rica (TEC) — San Carlos Campus · 2022–Present</div><div class="edu-courses">Data Structures &amp; Algorithms · Databases · Software Engineering · Operating Systems · Machine Learning · Computer Networks</div></div>
+  <div style="margin-top:1rem;color:var(--text2);font-size:0.76rem;line-height:1.8"><span style="color:var(--accent)">Languages:</span> English (C1 — advanced / professional working proficiency), Spanish (native)<br><span style="color:var(--accent)">Linux:</span> Ubuntu 24.04 as primary development environment. Daily use of Docker, Bash scripting, and cloud-native tooling.</div>
+</div>
+<div class="section">
+  <div class="section-header"><span class="section-num">05</span><span class="section-title">References</span><div class="section-rule"></div></div>
+  <div class="refs-grid"><div class="ref-card"><div class="ref-name">Dr. Abel Méndez Porras</div><div class="ref-role">Academic Advisor · Full Professor (Cat. 1) · Senior Researcher (Level 3)<br>School of Computing — TEC San Carlos</div><div class="ref-contact">amendez@tec.ac.cr · +(506) 8840 2957</div></div><div class="ref-card"><div class="ref-name">Dr. Mohammed Elmorsy</div><div class="ref-role">Industry Advisor<br>MacEwan University / PimaSens R&amp;D — Edmonton, Alberta, Canada</div><div class="ref-contact">linkedin.com/in/mohammedelmorsy-ab6a021b</div></div></div>
+</div>
+<div class="footer"><div class="footer-coords">10.3157° N, 84.5157° W</div>San Carlos, Costa Rica · ${new Date().getFullYear()}<br><span style="color:var(--accent)">open to work</span> · all projects open source on GitHub</div>
+</div>`;}
+
+function buildProjectView(id){const p=CV.projects.find(x=>x.id===id);if(!p)return'';return`<div class="detail-view fade-in">
+<button class="back-btn" onclick="goHome()">← back to portfolio</button>
+<div class="detail-header">
+  <div class="detail-eyebrow">${p.elev} · ${p.date}</div>
+  <div class="detail-title">${p.title}</div>
+  <div class="detail-sub">${p.sub}</div>
+  <div class="detail-desc">${p.desc}</div>
+  <div class="detail-stack">${p.stack.map(t=>`<span class="stack-chip">${t}</span>`).join('')}</div>
+  <div class="detail-links">${p.github?`<a class="detail-link" href="${p.github}" target="_blank">⌥ Source code</a>`:''}${p.live?`<a class="detail-link primary" href="${p.live}" target="_blank">↗ Live demo</a>`:''}</div>
+</div>
+${p.id==="praxis"?buildPraxisDemo():p.id==="auditor"?buildAuditorDemo():buildMLDemo()}
+<div><div class="section-header"><span class="section-title" style="font-size:0.9rem">Key contributions</span></div><ul class="exp-bullets">${p.bullets.map(b=>`<li style="color:var(--text2);font-size:0.78rem;line-height:1.8">${b}</li>`).join('')}</ul></div>
+</div>`;}
+
+function buildPraxisDemo(){return`<div class="demo-box">
+<div class="demo-label">Interactive Demo — CLI Simulator</div>
+<div class="demo-hint">Describe your tech stack. Praxis generates agent configuration files — simulating the real CLI output.</div>
+<textarea class="demo-input" id="praxis-input" rows="2" style="height:58px">${esc(STATE.praxisInput)}</textarea>
+<button class="demo-btn" onclick="runPraxis()">$ praxis generate --analyze .</button>
+<button class="tab-btn${STATE.praxisTab==='claude'?' active':''}" onclick="setPraxisTab('claude')" style="margin-left:0.5rem;margin-top:0.75rem">CLAUDE.md</button>
+<button class="tab-btn${STATE.praxisTab==='cursor'?' active':''}" onclick="setPraxisTab('cursor')" style="margin-left:0.4rem;margin-top:0.75rem">.cursorrules</button>
+<div id="praxis-loading"></div>
+${STATE.praxisOutput?`<div class="terminal" style="margin-top:1rem"><div class="term-bar"><span class="term-dot" style="background:#ff5f56"></span><span class="term-dot" style="background:#ffbd2e"></span><span class="term-dot" style="background:#27c93f"></span><span style="color:#555;font-size:0.68rem;margin-left:6px">${STATE.praxisTab==="claude"?"CLAUDE.md":".cursorrules"}</span></div><div class="term-body"><pre style="margin:0;color:#aaa;white-space:pre-wrap;font-family:var(--mono);font-size:0.72rem">${esc(STATE.praxisOutput)}</pre></div></div>`:''}
+</div>`;}
+
+function buildAuditorDemo(){const sevColor={CRITICAL:"finding-crit",HIGH:"finding-high",MEDIUM:"finding-med",LOW:"finding-low"};const sevTextColor={CRITICAL:"#d00",HIGH:"#FF5C00",MEDIUM:"#f5a623",LOW:"#7dd3b4"};return`<div class="demo-box">
+<div class="demo-label">Live Policy Analyzer — Real Rule Engine</div>
+<div class="demo-hint">Paste any IAM policy JSON. The same rule logic from the project runs client-side and returns color-coded findings.</div>
+<textarea class="demo-input" id="policy-input" rows="8" style="height:170px">${esc(STATE.policyInput)}</textarea>
+<button class="demo-btn" onclick="runPolicyAnalysis()">Analyze policy</button>
+<div id="policy-result" style="margin-top:1rem">
+${STATE.policyResult?STATE.policyResult.error?`<div class="error-card">${esc(STATE.policyResult.error)}</div>`:STATE.policyResult.findings.length===0?`<div class="clean-banner">✓ No findings. All checks passed for this policy.</div>`:`<div><div style="color:var(--text3);font-size:0.68rem;letter-spacing:0.08em;margin-bottom:0.75rem">${STATE.policyResult.findings.length} finding(s)</div>${STATE.policyResult.findings.map(f=>`<div class="finding-item ${sevColor[f.sev]||''}"><div class="finding-sev" style="color:${sevTextColor[f.sev]||'var(--text3)'}">${f.sev} · ${f.id}</div><div class="finding-title">${f.title}</div><div class="finding-detail">${esc(f.detail)}</div><div class="finding-fix">Fix: ${f.remediation}</div></div>`).join('')}</div>`:''}</div>
+</div>`;}
+
+function buildMLDemo(){return`<div class="demo-box">
+<div class="demo-label">Live API Demo — Hosted on Render</div>
+<div class="demo-hint">Enter player stats to get a predicted market value from the live ML model. May take ~30s to wake from cold start.</div>
+<div class="ml-grid">
+  <div class="ml-field"><label>Age</label><input type="number" id="ml-age" value="24" min="16" max="40"></div>
+  <div class="ml-field"><label>Games played</label><input type="number" id="ml-games" value="30" min="0"></div>
+  <div class="ml-field"><label>Goals</label><input type="number" id="ml-goals" value="15" min="0"></div>
+  <div class="ml-field"><label>Assists</label><input type="number" id="ml-assists" value="8" min="0"></div>
+  <div class="ml-field"><label>Minutes played</label><input type="number" id="ml-minutes" value="2500" min="0"></div>
+  <div class="ml-field"><label>Position (0=GK 1=DEF 2=MID 3=FWD)</label><input type="number" id="ml-pos" value="3" min="0" max="3"></div>
+</div>
+<button class="demo-btn" id="ml-btn" onclick="runML()">predict_value()</button>
+<div id="ml-result">
+${STATE.mlLoading?'<div class="loading"><div class="spinner"></div>Calling model on Render (may take ~30s to wake)...</div>':''}
+${STATE.mlResult&&STATE.mlResult.error?`<div class="error-card">${esc(STATE.mlResult.error)}<br><br>Try visiting <a href="https://ml-infrastart.onrender.com" target="_blank" style="color:var(--accent)">ml-infrastart.onrender.com</a> directly to wake the service.</div>`:''}
+${STATE.mlResult&&STATE.mlResult.value?`<div class="result-card"><div style="color:var(--text3);font-size:0.68rem;margin-bottom:0.25rem">predicted market value</div><div class="result-val">${STATE.mlResult.value}</div><div class="result-meta">model: RandomForest · R²=0.80 · 5-fold CV · data leakage corrected</div></div>`:''}
+</div>
+</div>`;}
+
+const SKILL_INFO={"Python":{desc:"Advanced Python across CLI tools, APIs, ML pipelines, and data engineering. Async/await, type hints, dataclasses, generators, context managers, and full test coverage with pytest.",why:"Python is Mathew's primary language — every major project is built with it. Depth here means owning the full backend of any modern system.",demo:`<div class="demo-box"><div class="demo-label">Code Sample — Data Leakage Fix (ml-infrastart)</div><div class="demo-hint">A real bug Mathew caught and fixed. R² went from 0.9997 to an honest 0.80.</div><div class="code-block"><span style="color:#555"># Bug: derived feature computed BEFORE train/test split</span>
+<span style="color:#FF5C00">df</span>[<span style="color:#7dd3b4">'goals_per_90'</span>] = df[<span style="color:#7dd3b4">'goals'</span>] / df[<span style="color:#7dd3b4">'minutes'</span>] * <span style="color:#7dd3b4">90</span>  <span style="color:#555"># BEFORE split — leakage!</span>
+<span style="color:#FF5C00">X_train</span>, <span style="color:#FF5C00">X_test</span> = train_test_split(df)
+
+<span style="color:#555"># Fix: split first, compute features inside pipeline</span>
+<span style="color:#FF5C00">pipeline</span> = Pipeline([
+    (<span style="color:#7dd3b4">'features'</span>, FeatureEngineer()),
+    (<span style="color:#7dd3b4">'scaler'</span>, StandardScaler()),
+    (<span style="color:#7dd3b4">'model'</span>, RandomForestRegressor())
+])
+<span style="color:#FF5C00">pipeline</span>.fit(X_train, y_train)  <span style="color:#555"># R²=0.80 — honest</span></div></div>`},"AWS":{desc:"Hands-on AWS experience building aws-policy-auditor — a Python CLI and FastAPI service that audits IAM policies and S3 bucket configurations against CIS benchmark rules using boto3.",why:"AWS is the dominant cloud platform. IAM and S3 security knowledge is specifically valuable — most teams have misconfigurations they don't know about.",demo:`<div class="demo-box"><div class="demo-label">Real Scan Output — aws-policy-auditor</div><div class="terminal"><div class="term-bar"><span class="term-dot" style="background:#ff5f56"></span><span class="term-dot" style="background:#ffbd2e"></span><span class="term-dot" style="background:#27c93f"></span></div><div class="term-body"><span class="term-prompt">$</span> <span class="term-out">python -m auditor.cli scan all</span>
+
+<span class="term-out">-- aws-policy-auditor -- IAM scan
+   profile: default  |  2026-06-06T18:30:43Z
+----------------------------------------------------</span>
+<span class="term-med">  ! MEDIUM    Weak password policy</span>
+<span class="term-out">           resource: account_password_policy</span>
+<span class="term-low">  - LOW       Password policy does not require uppercase</span>
+<span class="term-low">  - LOW       Password policy does not require symbols</span>
+<span class="term-low">  - LOW       Password reuse prevention not set</span>
+<span class="term-out">  Total: 4 finding(s)</span>
+
+<span style="color:#555"># Fixed in IAM console. Re-running...</span>
+
+<span class="term-prompt">$</span> <span class="term-out">python -m auditor.cli scan all</span>
+<span class="term-ok">  OK  No findings. All checks passed.</span>
+<span class="term-ok">  OK  No findings. All checks passed.</span></div></div><button class="demo-btn" onclick="goProject('auditor')" style="margin-top:1rem">→ Open full policy analyzer</button></div>`},"boto3":{desc:"boto3 is Amazon's official Python SDK for AWS. Mathew uses it to make authenticated API calls to IAM and S3 services.",why:"boto3 is the standard way to automate AWS in Python. Understanding the credential chain, pagination, and error handling patterns is essential for any cloud engineering role.",demo:`<div class="demo-box"><div class="demo-label">boto3 Credential Chain</div><div class="terminal"><div class="term-bar"><span class="term-dot" style="background:#ff5f56"></span><span class="term-dot" style="background:#ffbd2e"></span><span class="term-dot" style="background:#27c93f"></span></div><div class="term-body"><span style="color:#555"># boto3 looks for credentials in this order:</span>
+<span class="term-key">1.</span> <span class="term-out">Explicit in code: boto3.Session(aws_access_key_id=...)</span>
+<span class="term-key">2.</span> <span class="term-out">Environment variables: AWS_ACCESS_KEY_ID</span>
+<span class="term-key">3.</span> <span class="term-out">~/.aws/credentials file [default] profile</span>
+<span class="term-key">4.</span> <span class="term-out">EC2 instance role (IMDS at 169.254.169.254)</span>
+
+<span style="color:#555"># Mathew's auditor uses #3 locally, #4 on deployed infra</span>
+<span style="color:#555"># Same code, different credential source — no changes needed</span></div></div></div>`},"FastAPI":{desc:"FastAPI for high-performance async REST APIs — used in the ML predictor (Dockerized on Render), aws-policy-auditor, and as the API layer in KeyTechs.",why:"FastAPI is the production-standard Python API framework with auto-generated OpenAPI docs.",demo:`<div class="demo-box"><div class="demo-label">Live API — aws-policy-auditor</div><div class="demo-hint">The FastAPI service Mathew deployed wraps the rule engine and exposes it over HTTP.</div><a class="detail-link primary" href="https://aws-policy-auditor.onrender.com/docs" target="_blank" style="display:inline-flex">↗ Open live FastAPI docs</a></div>`},"Docker":{desc:"Docker for containerization — Dockerfiles, multi-stage builds, image optimization. Used in the ML predictor deployed on Render.",why:"Container literacy is non-negotiable in modern backend and devops roles.",demo:`<div class="demo-box"><div class="demo-label">Dockerfile Layer Explorer</div><div class="demo-hint">Layers are cached top-down. Put frequently changing code last.</div><div class="layer-row"><span class="layer-num">1</span><div class="layer-box" style="border-left:3px solid #7dd3b4"><div class="layer-title">FROM python:3.11-slim</div><div class="layer-note">Base image — slim variant, stable</div><div class="layer-cache cache-hit">✓ CACHE HIT</div></div></div><div class="layer-row"><span class="layer-num">2</span><div class="layer-box" style="border-left:3px solid #FF5C00"><div class="layer-title">COPY requirements.txt + pip install</div><div class="layer-note">Dependencies — cached unless requirements change</div><div class="layer-cache cache-hit">✓ CACHE HIT</div></div></div><div class="layer-row"><span class="layer-num">3</span><div class="layer-box" style="border-left:3px solid #FF5C00"><div class="layer-title">COPY . /app</div><div class="layer-note">App code — changes most frequently</div><div class="layer-cache cache-miss">⟳ REBUILT</div></div></div><div class="layer-row"><span class="layer-num">4</span><div class="layer-box"><div class="layer-title">EXPOSE 8000 + HEALTHCHECK</div><div class="layer-note">Runtime config — port + health endpoint</div></div></div><div class="layer-row"><span class="layer-num">5</span><div class="layer-box"><div class="layer-title">CMD ["uvicorn", "main:app"]</div><div class="layer-note">Entrypoint — single process per container</div></div></div></div>`},"k3s / Kubernetes":{desc:"k3s (lightweight Kubernetes) for self-managed cluster operations — pod scheduling, service discovery, DaemonSets.",why:"Operating a real cluster demonstrates infrastructure depth. Few junior engineers have done this.",demo:`<div class="demo-box"><div class="demo-label">Cluster Topology — obs-lab · Click any node</div><div class="topo-grid" style="margin-bottom:0.75rem">${K8S_NODES.map(n=>`<div class="topo-node ${STATE.k8sActive===n.id?'active':''}" onclick="setK8s('${n.id}')"><div class="topo-node-name">${n.name}</div><div class="topo-node-role">${n.role}</div></div>`).join('')}</div>${STATE.k8sActive?`<div class="topo-panel">${K8S_NODES.find(n=>n.id===STATE.k8sActive).desc}</div>`:`<div style="color:var(--text3);font-size:0.74rem;text-align:center">↑ click a component to see its role</div>`}</div>`},"PostgreSQL":{desc:"PostgreSQL for relational data modeling, query optimization, and integration with Python. Used in backend systems and data platform designs.",why:"PostgreSQL is the default production database for most backend systems.",demo:`<div class="demo-box"><div class="demo-label">SQL Explorer — Player Dataset</div><select class="demo-input" id="sql-select" onchange="setSqlQuery(this.value)" style="height:36px;resize:none;margin-bottom:0.75rem">${Object.keys(SQL_DATA).map(k=>`<option value="${k}" ${k===STATE.sqlQuery?"selected":""}>${k}</option>`).join('')}</select><div class="sql-result" id="sql-result">${sqlResult()}</div></div>`},"Go":{desc:"Go for concurrent systems and CLI tooling. Goroutines are lightweight threads managed by the Go runtime.",why:"Go is increasingly used for infrastructure tooling and high-throughput services.",demo:`<div class="demo-box"><div class="demo-label">Goroutine Concurrency Visualizer</div><div class="demo-hint">5 goroutines processing tasks in parallel. Each runs to completion independently.</div>${[0,1,2,3,4].map(i=>`<div class="goroutine-row"><span class="goroutine-label">goroutine ${i+1}</span><div class="goroutine-track"><div class="goroutine-bar" id="g-bar-${i}" style="width:0%"></div></div><span class="goroutine-status" id="g-stat-${i}">idle</span></div>`).join('')}<button class="demo-btn" onclick="runGoroutines()" style="margin-top:0.75rem">go run .</button></div>`},"Prometheus":{desc:"Prometheus for metrics collection, PromQL query language, alert rule authoring. Deployed in obs-lab on k3s with custom alerting pipelines.",why:"Observability is a career differentiator — few junior engineers have production monitoring experience.",demo:`<div class="demo-box"><div class="demo-label">PromQL Query Reference — obs-lab</div>${[{q:"rate(http_requests_total[5m])",d:"Request rate per second over 5 minutes."},{q:"histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",d:"P95 request latency — 95th percentile response time."},{q:'sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m]))',d:"Error rate — fraction of requests returning 5xx."},{q:'up{job="fastapi"}',d:"Service health — 1=up, 0=down or unreachable."}].map(({q,d})=>`<div style="background:var(--bg);border:1px solid var(--border);padding:0.75rem;margin-bottom:0.5rem;border-radius:2px"><div style="color:var(--accent);font-size:0.72rem;margin-bottom:0.3rem;word-break:break-all">${esc(q)}</div><div style="color:var(--text2);font-size:0.7rem">${d}</div></div>`).join('')}</div>`}};
+
+function buildSkillView(id,cat,label){const info=SKILL_INFO[label]||{desc:`${label} is part of Mathew's technical toolkit, used across multiple projects.`,why:"Core engineering skill applied in real project contexts."};return`<div class="detail-view fade-in">
+<button class="back-btn" onclick="goHome()">← back to portfolio</button>
+<div class="detail-header"><div class="detail-eyebrow">${esc(cat)}</div><div class="detail-title">${esc(label)}</div></div>
+<div style="color:var(--text2);font-size:0.8rem;line-height:1.85;margin-bottom:1rem">${info.desc}</div>
+<div class="skill-why"><strong>Why it matters for this profile:</strong><br>${info.why}</div>
+${info.demo||`<div class="demo-box"><div class="demo-label">Demo</div><div style="color:var(--text2);font-size:0.78rem">Used across multiple projects — see the Projects section for live demos.</div></div>`}
+</div>`;}
+
+function attachEvents(){}
+render();
+</script>
+</body>
+</html>
