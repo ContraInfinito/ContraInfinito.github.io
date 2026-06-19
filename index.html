@@ -195,6 +195,11 @@ const CV={
     "Observability":["Prometheus","Grafana","Loki","OpenTelemetry","PromQL","Alerting pipelines"]
   },
   projects:[
+    {id:"sentinel",title:"Sentinel Band",sub:"Zero-Trust Multi-Agent AWS Remediation",date:"Jun 2026",
+     stack:["Python","Multi-Agent","Band SDK","AWS","boto3","Anthropic","jsonschema","Docker"],elev:"△ 4807m",
+     desc:"A zero-trust, multi-agent system that automatically remediates AWS CIS-benchmark violations — safely. Four agents coordinate in one Band room over a deterministic pure-Python safety layer: the Auditor and Verifier are read-only, the Scribe has no cloud access, and only the Remediation agent can write, for low-risk reversible fixes. Four independent gates must agree before any AWS write, and a planted prompt-injection produces zero actions. Built for the Band of Agents Hackathon 2026 (Track 3: Regulated & High-Stakes).",
+     bullets:["Safety from architecture, not model trust: schema validation on every message, a risk-tier table, an execution allowlist, an input sanitizer, and an enforced rollback — 35 unit tests that still hold with every LLM removed from the diagram.","No agent trusts another agent's prose; only validated JSON crosses agent boundaries. Verified live: all four agents connect to Band over WebSocket, and a read-only scan ran against a real AWS account and found a genuine CloudTrail gap."],
+     github:"https://github.com/ContraInfinito/sentinel-band",demo:"sentinel"},
     {id:"praxis",title:"Praxis",sub:"AI Agent Methodology Transfer Tool",date:"May 2026",
      stack:["Python","PyPI","Claude Code","Cursor","CLI","YAML","Markdown"],elev:"△ 3842m",
      desc:"Built a Python CLI and Bob IDE custom mode that reads an existing codebase or planning document and generates idiomatic AI agent configuration for three target ecosystems simultaneously — Bob IDE, Claude Code, and Cursor — encoding a seven-principle methodology contract into each.",
@@ -325,7 +330,7 @@ function buildProjectView(id){const p=CV.projects.find(x=>x.id===id);if(!p)retur
   <div class="detail-stack">${p.stack.map(t=>`<span class="stack-chip">${t}</span>`).join('')}</div>
   <div class="detail-links">${p.github?`<a class="detail-link" href="${p.github}" target="_blank">⌥ Source code</a>`:''}${p.live?`<a class="detail-link primary" href="${p.live}" target="_blank">↗ Live demo</a>`:''}</div>
 </div>
-${p.id==="praxis"?buildPraxisDemo():p.id==="auditor"?buildAuditorDemo():buildMLDemo()}
+${p.id==="sentinel"?buildSentinelDemo():p.id==="praxis"?buildPraxisDemo():p.id==="auditor"?buildAuditorDemo():buildMLDemo()}
 <div><div class="section-header"><span class="section-title" style="font-size:0.9rem">Key contributions</span></div><ul class="exp-bullets">${p.bullets.map(b=>`<li style="color:var(--text2);font-size:0.78rem;line-height:1.8">${b}</li>`).join('')}</ul></div>
 </div>`;}
 
@@ -366,6 +371,26 @@ ${STATE.mlLoading?'<div class="loading"><div class="spinner"></div>Calling model
 ${STATE.mlResult&&STATE.mlResult.error?`<div class="error-card">${esc(STATE.mlResult.error)}<br><br>Try visiting <a href="https://ml-infrastart.onrender.com" target="_blank" style="color:var(--accent)">ml-infrastart.onrender.com</a> directly to wake the service.</div>`:''}
 ${STATE.mlResult&&STATE.mlResult.value?`<div class="result-card"><div style="color:var(--text3);font-size:0.68rem;margin-bottom:0.25rem">predicted market value</div><div class="result-val">${STATE.mlResult.value}</div><div class="result-meta">model: RandomForest · R²=0.80 · 5-fold CV · data leakage corrected</div></div>`:''}
 </div>
+</div>`;}
+
+function buildSentinelDemo(){return`<div class="demo-box">
+<div class="demo-label">Pipeline Transcript — simulate_pipeline (mocked AWS, no keys, no spend)</div>
+<div class="demo-hint">The real agent tools run against a deliberately non-compliant account: detection → independent verification → gated remediation → escalation. The injected tag produces zero actions.</div>
+<div class="terminal"><div class="term-bar"><span class="term-dot" style="background:#ff5f56"></span><span class="term-dot" style="background:#ffbd2e"></span><span class="term-dot" style="background:#27c93f"></span><span style="color:#555;font-size:0.68rem;margin-left:6px">python -m demo.simulate_pipeline</span></div><div class="term-body"><span class="term-prompt">@Auditor</span>     <span class="term-out">4 CIS findings · injected tag arrives sanitized (no &lt; &gt; { } · no @mention)</span>
+
+<span class="term-prompt">@Verifier</span>    <span class="term-out">re-queried AWS independently</span>
+<span class="term-low">   CIS-2.1.1   confirmed · tier 1</span>
+<span class="term-med">   CIS-2.1.2   confirmed · tier 2</span>
+<span class="term-med">   CIS-3.1     confirmed · tier 2</span>
+<span style="color:#d00">   CIS-1.16    confirmed · tier 3</span>
+
+<span class="term-prompt">@Remediation</span> <span class="term-ok">CIS-2.1.1  s3:PutBucketEncryption · success=true</span>
+<span class="term-out">             re-scan: bucket is now encrypted ✓</span>
+<span style="color:#d00">@Remediation CIS-2.1.2  denied by policy gate · success=false</span>
+<span class="term-prompt">@Scribe</span>      <span class="term-out">escalated tier 2 / tier 3 to a human · full trail logged</span>
+
+<span class="term-ok">   the prompt injection produced ZERO actions</span></div></div>
+<button class="demo-btn" onclick="window.open('https://github.com/ContraInfinito/sentinel-band','_blank')" style="margin-top:1rem">⌥ View source on GitHub</button>
 </div>`;}
 
 const SKILL_INFO={"Python":{desc:"Advanced Python across CLI tools, APIs, ML pipelines, and data engineering. Async/await, type hints, dataclasses, generators, context managers, and full test coverage with pytest.",why:"Python is Mathew's primary language — every major project is built with it. Depth here means owning the full backend of any modern system.",demo:`<div class="demo-box"><div class="demo-label">Code Sample — Data Leakage Fix (ml-infrastart)</div><div class="demo-hint">A real bug Mathew caught and fixed. R² went from 0.9997 to an honest 0.80.</div><div class="code-block"><span style="color:#555"># Bug: derived feature computed BEFORE train/test split</span>
